@@ -1,0 +1,70 @@
+.wrapper {
+    /* 必须：确保 12mm 的 padding 是向内压缩，而不是向外撑大 */
+    box-sizing: border-box;
+    height: 100%;
+    padding: 12mm;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.calendar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header {
+  text-align: left;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.calendar-header h1 { margin: 0; font-size: 48px; color: #eee; }
+.calendar-header h2 { margin: 0; font-size: 30px; color: #333; }
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* 关键修改：显式告诉 grid 每一行应该平分剩余高度 */
+  /* grid-template-rows: repeat(auto-fill, 1fr); 或者保持 grid-auto-rows */
+  grid-auto-rows: 1fr;
+
+  /* 关键修改：确保 grid 占据 container 剩下的高度 */
+  flex: 1;
+
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+
+.weekday-label {
+  background: #f8f8f8;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.day-cell {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* 修复 flex 下 grid 溢出问题 */
+}
+
+.day-cell.empty {
+  background-color: #f9f9f9;
+}
+
+.day-number {
+  font-size: 18px;
+  font-weight: 500;
+}
